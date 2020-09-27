@@ -1,0 +1,8 @@
+{
+  "repositories": [
+      {
+          "type": "vcs",
+          "url":  "git@github.com:danielsmota/maiscafe_repo.git"
+      }
+  ]
+}

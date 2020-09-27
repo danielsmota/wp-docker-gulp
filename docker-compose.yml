@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  wordpress:
+    build: .
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wpdb
+    volumes:
+      - ./dist:/var/www/html/wp-content/themes/maiscafeporfavor
+
+  node:
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    expose:
+      - "3000"
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+networks:
+  back:
+
+volumes:
+  db:
